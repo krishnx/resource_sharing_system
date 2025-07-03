@@ -21,12 +21,12 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Resource Sharing API",
+      title='Resource Sharing API',
       default_version='v1',
-      description="API documentation for the Resource Sharing System",
-      terms_of_service="https://www.example.com/terms/",
-      contact=openapi.Contact(email="support@example.com"),
-      license=openapi.License(name="MIT License"),
+      description='API documentation for the Resource Sharing System',
+      terms_of_service='https://www.example.com/terms/',
+      contact=openapi.Contact(email='support@example.com'),
+      license=openapi.License(name='MIT License'),
    ),
    public=True,
    permission_classes=[permissions.AllowAny],

@@ -1,5 +1,5 @@
 from django.test import TestCase
-from sharing.models import User, Group, Resource, ResourceUserShare, ResourceGroupShare
+from sharing.models import Users, Group, Resource, ResourceUserShare, ResourceGroupShare
 from sharing.services import ResourceService
 
 
@@ -7,22 +7,22 @@ class ResourceServiceTest(TestCase):
 
     def setUp(self):
         # Users
-        self.alice = User.objects.create(username="alice")
-        self.bob = User.objects.create(username="bob")
-        self.carol = User.objects.create(username="carol")
+        self.alice = Users.objects.create(username='alice')
+        self.bob = Users.objects.create(username='bob')
+        self.carol = Users.objects.create(username='carol')
 
         # Groups
-        self.group1 = Group.objects.create(name="group1")
-        self.group2 = Group.objects.create(name="group2")
+        self.group1 = Group.objects.create(name='group1')
+        self.group2 = Group.objects.create(name='group2')
 
         # Add users to groups
         self.group1.members.add(self.alice, self.bob)
         self.group2.members.add(self.carol)
 
         # Resources
-        self.resource1 = Resource.objects.create(name="Resource 1")
-        self.resource2 = Resource.objects.create(name="Resource 2", shared_with_everyone=True)
-        self.resource3 = Resource.objects.create(name="Resource 3")
+        self.resource1 = Resource.objects.create(name='Resource 1')
+        self.resource2 = Resource.objects.create(name='Resource 2', shared_with_everyone=True)
+        self.resource3 = Resource.objects.create(name='Resource 3')
 
         # Shares
         # Resource 1 shared directly with Alice and with group1 (which includes Alice and Bob)
@@ -39,28 +39,28 @@ class ResourceServiceTest(TestCase):
         # Resource 1 should have alice (direct) + alice,bob (group) = alice, bob distinct
         users_r1 = self.service.get_users_with_access_to_resource(self.resource1)
         usernames_r1 = set(u.username for u in users_r1)
-        self.assertEqual(usernames_r1, {"alice", "bob"})
+        self.assertEqual(usernames_r1, {'alice', 'bob'})
 
         # Resource 2 shared with everyone, so all users
         users_r2 = self.service.get_users_with_access_to_resource(self.resource2)
         usernames_r2 = set(u.username for u in users_r2)
-        self.assertEqual(usernames_r2, {"alice", "bob", "carol"})
+        self.assertEqual(usernames_r2, {'alice', 'bob', 'carol'})
 
         # Resource 3 shared directly with Carol only
         users_r3 = self.service.get_users_with_access_to_resource(self.resource3)
         usernames_r3 = set(u.username for u in users_r3)
-        self.assertEqual(usernames_r3, {"carol"})
+        self.assertEqual(usernames_r3, {'carol'})
 
     def test_get_resources_accessible_by_user(self):
         # Alice has resource1 (direct + group) and resource2 (global)
         resources_alice = self.service.get_resources_accessible_by_user(self.alice)
         resource_names_alice = set(r.name for r in resources_alice)
-        self.assertEqual(resource_names_alice, {"Resource 1", "Resource 2"})
+        self.assertEqual(resource_names_alice, {'Resource 1', 'Resource 2'})
 
         # Bob has resource1 (group) and resource2 (global)
         resources_bob = self.service.get_resources_accessible_by_user(self.bob)
         resource_names_bob = set(r.name for r in resources_bob)
-        self.assertEqual(resource_names_bob, {"Resource 1", "Resource 2"})
+        self.assertEqual(resource_names_bob, {'Resource 1', "Resource 2"})
 
         # Carol has resource2 (global) and resource3 (direct)
         resources_carol = self.service.get_resources_accessible_by_user(self.carol)

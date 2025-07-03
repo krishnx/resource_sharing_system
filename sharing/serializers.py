@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import User, Resource
+from .models import Users, Resource
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email']
+        model = Users
+        fields = ['id', 'name', 'email', 'is_active', 'is_superuser']
 
 
 class ResourceSerializer(serializers.ModelSerializer):
