@@ -62,7 +62,8 @@ class ResourceUserCountView(BaseView):
     )
     def get(self, request):
         result = self.RESOURCE_VIEW.get_resource_user_counts()
-        data = [{'resource': ResourceSerializer(entry['resource']).data, 'user_count': entry['user_count']} for entry in result]
+        data = [{'resource': ResourceSerializer(entry['resource']).data, 'user_count': entry['user_count']}
+                for entry in result]
         return Response({'resources': data})
 
 
@@ -74,5 +75,6 @@ class UserResourceCountView(BaseView):
     )
     def get(self, request):
         result = self.RESOURCE_VIEW.get_user_resource_counts()
-        data = [{'user': UserSerializer(entry['user']).data, 'resource_count': entry['resource_count']} for entry in result]
+        data = [{'user': UserSerializer(entry['user']).data, 'resource_count': entry['resource_count']}
+                for entry in result]
         return Response({'users': data})

@@ -1,4 +1,4 @@
-from sharing.models import Resource, User, ResourceGroupShare
+from sharing.models import Resource, User
 
 
 class ResourceService:

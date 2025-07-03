@@ -14,6 +14,8 @@ exclude =
     .eggs,
     manage.py,
     settings.py
+    migrations
+    .idea
 
 # Show source code for each error
 show-source = true
