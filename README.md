@@ -90,7 +90,41 @@ make lint
 | GET    | `/users/with-resource-count` | List all users with resource counts        |
 
 
+## CURL commands
+1. **List users with access to a resource:**
+
+```bash
+
+curl -X 'GET' \
+  'http://localhost:8000/api/resource/1/access-list' \
+  -H 'accept: application/json' \
+  -H 'X-CSRFTOKEN: PLTW5PiqVs2xjE3OEOip754HnXCOVgGmu96rdu00e2r60ZE34c53ulMW1YHyuGXv'
+```
 
 
+2. **List resources accessible by a user:**
 
+```bash
+curl -X 'GET' \
+  'http://localhost:8000/api/user/3/resources' \
+  -H 'accept: application/json' \
+  -H 'X-CSRFTOKEN: PLTW5PiqVs2xjE3OEOip754HnXCOVgGmu96rdu00e2r60ZE34c53ulMW1YHyuGXv'
+```
 
+3. **List resources with user counts:**
+
+```bash
+curl -X 'GET' \
+  'http://localhost:8000/api/resources/with-user-count' \
+  -H 'accept: application/json' \
+  -H 'X-CSRFTOKEN: PLTW5PiqVs2xjE3OEOip754HnXCOVgGmu96rdu00e2r60ZE34c53ulMW1YHyuGXv'
+```
+
+4. **List users with resource counts:**
+
+```bash
+curl -X 'GET' \
+  'http://localhost:8000/api/users/with-resource-count' \
+  -H 'accept: application/json' \
+  -H 'X-CSRFTOKEN: PLTW5PiqVs2xjE3OEOip754HnXCOVgGmu96rdu00e2r60ZE34c53ulMW1YHyuGXv'
+```
