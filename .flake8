@@ -1,0 +1,22 @@
+[flake8]
+# Maximum allowed line length
+max-line-length = 120
+
+# Exclude these paths
+exclude =
+    .git,
+    __pycache__,
+    env/,
+    venv/,
+    migrations/,
+    *.pyc,
+    *.egg-info,
+    .eggs,
+    manage.py,
+    settings.py
+
+# Show source code for each error
+show-source = true
+
+# Enable built-in complexity checking (optional)
+max-complexity = 10
