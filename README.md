@@ -128,3 +128,29 @@ curl -X 'GET' \
   -H 'accept: application/json' \
   -H 'X-CSRFTOKEN: PLTW5PiqVs2xjE3OEOip754HnXCOVgGmu96rdu00e2r60ZE34c53ulMW1YHyuGXv'
 ```
+
+## Docker Compose setup (if required)
+1. **Build and run the containers:**
+
+```bash
+docker-compose up -d
+```
+
+2. **Run migrations inside the container:**
+
+```bash
+docker-compose exec web python manage.py migrate
+```
+
+3. **Logs:**
+
+```bash
+docker-compose logs -f
+```
+
+4. **Stop the containers:**
+
+```bash
+docker-compose down
+```
+
